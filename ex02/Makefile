@@ -1,33 +1,44 @@
-# Folders and Names
-NAME		= account
-SRCSDIR		= .
-INCLUDES	= .
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: math <math@student.42.fr>                  +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/09/01 21:52:20 by math42            #+#    #+#              #
+#    Updated: 2024/04/24 13:03:42 by math             ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCS		= tests.cpp Account.cpp
+NAME = bankapp
 
-# Compiler options
-CC			= clang++
-CFLAGS		= -Wall -Wextra -Werror -std=c++98
+CC = c++
 
-###################################################
-# The rest is done by the MakeFile automatically, #
-# you should not have to modify it				  #
-###################################################
+SRCS =  Account.cpp tests.cpp
+
+OBJS = ${SRCS:.cpp=.o}
+
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -I.#-g3 #-fsanitize=address
 
 all: $(NAME)
 
-$(NAME): $(SRCSDIR)/$(SRCS)
-	$(CC) $(CFLAGS) -o $@ $^
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+%.o:%.c
+	$(CC) $(FLAGS) $@ $<
 
 clean:
-	rm -rf *.o
+	@rm -f *.o
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
-test: $(NAME)
+fsanitize: CFLAGS += -fsanitize=address
+fsanitize: clean all
+
+test: all
 	./$(NAME)
 
-.PHONY: all clean fclean re test
