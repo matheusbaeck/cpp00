@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: math42 <math42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 10:35:51 by math42            #+#    #+#             */
-/*   Updated: 2023/09/02 11:32:04 by math42           ###   ########.fr       */
+/*   Updated: 2024/04/25 16:25:09 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int	main(int argc, char *argv[])
 				argv[i][j] += 'A' - 'a';
 			}
 		}
-		std::cout << argv[i];
 	}
+	i = 0;
+	while (++i < argc)
+		std::cout << argv[i];
 	std::cout << std::endl;
 	return (0);
 }
