@@ -12,6 +12,17 @@
 
 #include "yellow_pages.hpp"
 
+static void	header(void)
+{
+	std::string	sep = " | ";
+
+	std::cout
+			<< std::setw(10) << "INDEX" << sep
+			<< std::setw(10) << "NAME" << sep
+			<< std::setw(10) << "LAST NAME" << sep
+			<< std::setw(10) << "SECRET" << std::endl;
+}
+
 int main()
 {
 	PhoneBook	yellow_page;
@@ -21,12 +32,16 @@ int main()
 	{
 		std::cout << "Waiting action: ";
 		std::cin >> entry;
+		if (std::cin.fail())
+			return (0);
 		if (entry == "ADD")
 		{
 			yellow_page.add_contact();
 		}
 		else if (entry == "SEARCH")
 		{
+			header();
+			yellow_page.list_contact();
 			std::cout << "Contact name: ";
 			std::cin >> entry;
 			yellow_page.search_contact(entry);
