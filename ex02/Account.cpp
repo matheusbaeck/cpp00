@@ -6,7 +6,7 @@
 /*   By: math <math@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 19:36:30 by math42            #+#    #+#             */
-/*   Updated: 2024/05/03 14:39:35 by math             ###   ########.fr       */
+/*   Updated: 2024/05/29 12:38:40 by math             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	Account::_displayTimestamp( void )
 	std::tm *now = std::localtime(&t);
 
 	oss << "[" << (now->tm_year + 1900)
-	<< std::setw(2) << std::setfill('0') << 99999
+	<< std::setw(2) << std::setfill('0') << (now->tm_mon + 1)
 	<< std::setw(2) << std::setfill('0') << now->tm_mday << "_"
 	<< std::setw(2) << std::setfill('0') << now->tm_hour
 	<< std::setw(2) << std::setfill('0') << now->tm_min

@@ -6,7 +6,7 @@
 #    By: math <math@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 21:52:20 by math42            #+#    #+#              #
-#    Updated: 2024/04/24 13:03:42 by math             ###   ########.fr        #
+#    Updated: 2024/05/29 14:42:20 by math             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,12 @@ re: fclean all
 fsanitize: CFLAGS += -fsanitize=address
 fsanitize: clean all
 
-test: all
-	./$(NAME)
+log:
+	cat 19920104_091532.log | awk '{print$2}' | ls
+
+out: $(NAME)
+	./$(NAME) | awk '{print$2}' > out
+
+test: all log out
+	diff -s log out
 
