@@ -6,7 +6,7 @@
 #    By: math <math@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 21:52:20 by math42            #+#    #+#              #
-#    Updated: 2024/05/29 14:42:20 by math             ###   ########.fr        #
+#    Updated: 2024/05/30 20:47:21 by math             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ $(NAME): $(OBJS)
 clean:
 	@rm -f *.o
 
-fclean: clean
+fclean: clean rmfiles
 	@rm -f $(NAME)
 
 re: fclean all
@@ -40,10 +40,14 @@ fsanitize: CFLAGS += -fsanitize=address
 fsanitize: clean all
 
 log:
-	cat 19920104_091532.log | awk '{print$2}' | ls
+	<19920104_091532.log awk '{print$$2}' >log
 
 out: $(NAME)
-	./$(NAME) | awk '{print$2}' > out
+	./$(NAME) | awk '{print$$2}' > out
+	./$(NAME) | awk '{print$$1}' > out_timestamp
+
+rmfiles:
+	rm -f log out out_timestamp
 
 test: all log out
 	diff -s log out
